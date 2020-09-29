@@ -1,4 +1,4 @@
-package com.example.screenshotlistentest;
+package com.example.screenshotlistentest.manager;
 
 import android.content.Context;
 import android.database.ContentObserver;
@@ -107,7 +107,7 @@ public class ScreenShotListenManager {
         //注册内容观察者
         mContext.getContentResolver().registerContentObserver(
                 MediaStore.Images.Media.INTERNAL_CONTENT_URI,
-                false,
+                false,//设定是否匹配Uri的派生Uri
                 mInternalObserver
         );
         mContext.getContentResolver().registerContentObserver(

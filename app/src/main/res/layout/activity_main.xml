@@ -1,28 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".activity.MainActivity"
+    android:id="@+id/main_layout">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:text="监听截屏"
-        android:textSize="32sp"
-        android:textColor="#FFFFFF"
-        android:background="@color/colorPrimary"/>
-    <Button
-        android:id="@+id/open_listener"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="打开截屏监听"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:id="@+id/fragments_contain"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#dddddd"
+            />
+
+        <RadioGroup
+            android:id="@+id/rgTab"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_alignParentBottom="true"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp">
+
+            <RadioButton
+                android:id="@+id/page1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:text="首页"/>
+
+            <RadioButton
+                android:id="@+id/page2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:text="附页"/>
+
+        </RadioGroup>
+
+    </LinearLayout>
 
     <Button
-        android:id="@+id/close_listener"
-        android:layout_width="match_parent"
+        android:id="@+id/getHelp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="关闭截屏监听"/>
-</LinearLayout>
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:background="#8888"
+        android:text="求助反馈"
+        android:visibility="invisible"/>
+
+</RelativeLayout>
