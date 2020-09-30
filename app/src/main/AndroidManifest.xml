@@ -11,7 +11,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".activity.HelpActivity"></activity>
+        <service
+            android:name=".service.HideButtonAtTimeService"
+            android:enabled="true"
+            android:exported="true"></service>
+
+        <activity android:name=".activity.HelpActivity" />
         <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
