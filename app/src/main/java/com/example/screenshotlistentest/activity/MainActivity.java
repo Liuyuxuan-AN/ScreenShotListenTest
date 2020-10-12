@@ -21,6 +21,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.screenshotlistentest.fragment.Page1Fragment;
 import com.example.screenshotlistentest.fragment.Page2Fragment;
 import com.example.screenshotlistentest.R;
@@ -28,6 +29,12 @@ import com.example.screenshotlistentest.manager.ScreenShotListenManager;
 
 import java.lang.ref.WeakReference;
 
+/**
+ *    author : 刘雨轩
+ *    e-mail : 1262610086@qq.com
+ *    date   : ${DATE}${TIME}
+ *    desc   :主活动，包含两个碎片；其中调用截图监听的接口。
+ */
 public class MainActivity extends AppCompatActivity {
     public ScreenShotListenManager manager;
     MainHandler mainHandler = new MainHandler(MainActivity.this);
@@ -46,8 +53,8 @@ public class MainActivity extends AppCompatActivity {
         private final int MSG_HIDE = 1;
         private final WeakReference<MainActivity> weakRef;
 
-        public MainHandler(MainActivity pAcitivity){
-            weakRef = new WeakReference<MainActivity>(pAcitivity);
+        public MainHandler(MainActivity pActivity){
+            weakRef = new WeakReference<MainActivity>(pActivity);
         }
 
         @Override
@@ -138,8 +145,7 @@ public class MainActivity extends AppCompatActivity {
         getHelp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this,HelpActivity.class);
-                startActivity(intent);
+                ARouter.getInstance().build("/com/HelpActivity").navigation();
             }
         });
         radioGroup = (RadioGroup)findViewById(R.id.rgTab);

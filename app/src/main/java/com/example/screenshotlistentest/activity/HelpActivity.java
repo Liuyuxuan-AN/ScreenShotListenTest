@@ -4,10 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.example.screenshotlistentest.Item;
 import com.example.screenshotlistentest.R;
 import com.example.screenshotlistentest.adapter.ItemAdapter;
@@ -15,6 +19,7 @@ import com.example.screenshotlistentest.adapter.ItemAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
+@Route(path = "/com/HelpActivity")
 public class HelpActivity extends AppCompatActivity {
 
     private List<Item> itemList = new ArrayList<>();
@@ -35,6 +40,16 @@ public class HelpActivity extends AppCompatActivity {
         ItemAdapter adapter = new ItemAdapter(HelpActivity.this,R.layout.listview_item,itemList);
         ListView listView = (ListView)findViewById(R.id.list_view);
         listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                switch (i){
+                    case 0:
+                        Intent intent = new Intent(HelpActivity.this,WebViewActivity.class);
+                        startActivity(intent);
+                }
+            }
+        });
     }
 
     @Override
