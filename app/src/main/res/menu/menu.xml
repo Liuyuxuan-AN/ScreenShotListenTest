@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:orderInCategory="1"
+        app:showAsAction="always"
+        android:title="删除"/>
+
+    <item
+        android:title="保存"
+        android:orderInCategory="0"
+        app:showAsAction="always"/>
+
+</menu>

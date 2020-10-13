@@ -3,7 +3,7 @@
     package="com.example.screenshotlistentest">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".MyApplication"
@@ -13,8 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".activity.WebViewActivity"></activity>
-
+        <activity android:name=".activity.NoteActivity"></activity>
+        <activity android:name=".activity.WebViewActivity" />
         <activity android:name=".activity.HelpActivity" />
         <activity android:name=".activity.MainActivity">
             <intent-filter>

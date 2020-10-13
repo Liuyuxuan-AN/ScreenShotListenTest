@@ -90,10 +90,6 @@ public class MainActivity extends AppCompatActivity {
             setDaemon(true);
         }
 
-        private synchronized void reset(){
-            startVisibleTime = System.currentTimeMillis();
-        }
-
         @Override
         public void run() {
             startVisibleTime = System.currentTimeMillis();
