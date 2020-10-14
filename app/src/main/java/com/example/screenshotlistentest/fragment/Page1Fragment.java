@@ -30,7 +30,7 @@ public class Page1Fragment extends Fragment {
     public static DatabaseHelper dbHelper;
     private SQLiteDatabase db;
     private List<String> note = new ArrayList<>();
-    private ArrayAdapter<String> adapter;
+    public ArrayAdapter<String> adapter;
     private ListView listView;
     private SwipeRefreshLayout swipeRefresh;
     private Button add;
@@ -52,7 +52,8 @@ public class Page1Fragment extends Fragment {
         add = (Button)view.findViewById(R.id.add);
         swipeRefresh = (SwipeRefreshLayout)view.findViewById(R.id.swipe_refresh);
         listView=(ListView)view.findViewById(R.id.list_view);
-
+        adapter=new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_1,note);
+        listView.setAdapter(adapter);
         return view;
     }
 
@@ -106,9 +107,8 @@ public class Page1Fragment extends Fragment {
                 note.add(note_item);
             }while(cursor.moveToNext());
         }
+        adapter.notifyDataSetChanged();
         cursor.close();
-        adapter=new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_1,note);
-        listView.setAdapter(adapter);
     }
 
     //下拉刷新事件，注意在Ui线程上进行Ui操作

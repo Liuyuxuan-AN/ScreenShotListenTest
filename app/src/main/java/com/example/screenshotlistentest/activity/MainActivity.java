@@ -22,10 +22,15 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.example.screenshotlistentest.NoteChangeMessage;
 import com.example.screenshotlistentest.fragment.Page1Fragment;
 import com.example.screenshotlistentest.fragment.Page2Fragment;
 import com.example.screenshotlistentest.R;
 import com.example.screenshotlistentest.manager.ScreenShotListenManager;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.lang.ref.WeakReference;
 
@@ -123,6 +128,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         initView();
         initFragment();
+        //对EventBus注册监听
+        EventBus.getDefault().register(this);
         manager = ScreenShotListenManager.newInstance(MainActivity.this);
         manager.startListen();
         if(ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
@@ -210,6 +217,11 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
     /**
      * 结束活动时结束截屏监听
      */
@@ -233,5 +245,11 @@ public class MainActivity extends AppCompatActivity {
                 }
                 break;
         }
+    }
+
+    //对ListView中内容是否改变进行监听
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onChange(NoteChangeMessage message){
+        page1Fragment.refresh();
     }
 }

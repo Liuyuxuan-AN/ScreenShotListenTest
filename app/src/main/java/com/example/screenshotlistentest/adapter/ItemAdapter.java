@@ -10,13 +10,18 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.screenshotlistentest.Item;
 import com.example.screenshotlistentest.R;
 
 import java.util.List;
 
+/**
+ *    author : 刘雨轩
+ *    e-mail : 1262610086@qq.com
+ *    date   : 2020/10/10
+ *    desc   :自定义适配器，用于HelpActivity中的ListView
+ */
 public class ItemAdapter extends ArrayAdapter {
     private final int resourceId;
 
@@ -25,6 +30,7 @@ public class ItemAdapter extends ArrayAdapter {
         resourceId = textResourceId;
     }
 
+    //在进行适配时自动运行
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {

@@ -1,6 +1,5 @@
 package com.example.screenshotlistentest.activity;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
@@ -8,18 +7,17 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.screenshotlistentest.DatabaseHelper;
+import com.example.screenshotlistentest.NoteChangeMessage;
 import com.example.screenshotlistentest.R;
 import com.example.screenshotlistentest.fragment.Page1Fragment;
 
-import org.w3c.dom.Text;
+import org.greenrobot.eventbus.EventBus;
 
 import static com.example.screenshotlistentest.DatabaseHelper.TABLE_NAME;
 import static com.example.screenshotlistentest.fragment.Page1Fragment.TAG_INSERT;
@@ -94,6 +92,7 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
                     values.put("content",content.getText().toString());
                     //将数据插入到数据库中
                     db.insert(TABLE_NAME,null,values);
+                    publishChange();
                     values.clear();
                     Toast.makeText(this,"保存成功",Toast.LENGTH_SHORT).show();
                     finish();
@@ -105,12 +104,14 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
                     values.put("title",update_title);
                     values.put("content",update_content);
                     db.update(TABLE_NAME,values,"id = ",new String[] {String.valueOf(id)});
+                    publishChange();
                     finish();
                     break;
                 }
             case R.id.delete:
                 if(tag == TAG_UPDATE){
                     db.delete(TABLE_NAME,"id = ?",new String[] {String.valueOf(id)});
+                    publishChange();
                     Toast.makeText(this,"删除成功",Toast.LENGTH_SHORT).show();
                 }else if(tag == TAG_INSERT){
                     Toast.makeText(this,"别逗了，都没保存你还删个啥，去去去",Toast.LENGTH_SHORT).show();
@@ -119,5 +120,9 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             default:
         }
+    }
+
+    private void publishChange(){
+        EventBus.getDefault().post(NoteChangeMessage.getInstance("Changed!"));
     }
 }
